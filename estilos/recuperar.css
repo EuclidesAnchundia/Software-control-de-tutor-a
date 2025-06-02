@@ -1,0 +1,96 @@
+:root {
+  --rojo: #D90429;
+  --gris-claro: #f5f5f5;
+  --gris-oscuro: #333;
+  --blanco: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--gris-claro);
+  color: var(--gris-oscuro);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor {
+  background: var(--blanco);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo-grande {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  color: var(--rojo);
+  margin-bottom: 1.5rem;
+}
+
+form {
+  text-align: left;
+}
+
+form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+form input {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+form button {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: var(--rojo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+form button:hover {
+  background-color: #a50321;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: green;
+  font-size: 0.9rem;
+}
+
+.volver {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.volver a {
+  color: var(--rojo);
+  text-decoration: none;
+}
+
+.volver a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,176 @@
+:root {
+  --rojo: #D90429;
+  --verde: #28a745;
+  --amarillo: #ffc107;
+  --gris-oscuro: #333;
+  --gris-claro: #f5f5f5;
+  --blanco: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--gris-claro);
+  color: var(--gris-oscuro);
+}
+
+header {
+  background-color: var(--gris-oscuro);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.logo-chico {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.titulo-header {
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+footer {
+  background-color: var(--gris-oscuro);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.tutor-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: var(--blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: var(--rojo);
+  margin-bottom: 1rem;
+}
+
+.tarjetas-estudiantes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tarjeta {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1rem 1.2rem;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.tarjeta:hover {
+  transform: scale(1.01);
+  background-color: #f8f8f8;
+}
+
+.btn-volver {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #999;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.detalle-estudiante h3 {
+  margin-top: 0;
+}
+
+.progress {
+  height: 12px;
+  background: #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--rojo);
+  transition: width 0.3s ease;
+}
+
+.estado {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: white;
+  margin-bottom: 0.8rem;
+}
+
+.estado.verde { background: var(--verde); }
+.estado.amarillo { background: var(--amarillo); color: black; }
+.estado.rojo { background: var(--rojo); }
+
+.entrega-card, .sesion-card {
+  background: #fdfdfd;
+  border-left: 5px solid var(--rojo);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+
+form {
+  margin-top: 1.5rem;
+  background: #fdfdfd;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+form label {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  margin-top: 0.3rem;
+}
+
+form button {
+  margin-top: 1rem;
+  background-color: var(--rojo);
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #a0021f;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: green;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.oculto {
+  display: none;
+}

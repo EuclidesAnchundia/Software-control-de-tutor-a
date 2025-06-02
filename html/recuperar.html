@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar Contraseña - ULEAM</title>
+  <link rel="stylesheet" href="../estilos/recuperar.css" />
+  <link rel="icon" href="../imagenes/logo.png" type="image/png" />
+  <script src="../scripts/recuperar.js" defer></script>
+</head>
+<body>
+  <div class="contenedor">
+    <img src="../imagenes/Uleam-logo.png" alt="Logo ULEAM" class="logo-grande" />
+    <h2>Recuperar Contraseña</h2>
+    <form id="form-recuperar">
+      <label for="correo">Correo institucional:</label>
+      <input type="email" id="correo" placeholder="ejemplo@estudiantes.uleam.edu.ec" required />
+      <span class="error" id="error-correo"></span>
+      <span class="success" id="ok-correo"></span>
+      <button type="submit">Enviar enlace</button>
+    </form>
+    <p class="volver"><a href="login.html">← Volver al inicio de sesión</a></p>
+  </div>
+</body>
+</html>
