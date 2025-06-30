@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel del Estudiante - ULEAM</title>
+  <link rel="stylesheet" href="../estilos/base.css" />
   <link rel="stylesheet" href="../estilos/estudiante.css" />
   <link rel="icon" href="../imagenes/logo.png" type="image/png" />
   <script src="../scripts/estudiante.js" defer></script>
@@ -60,6 +61,19 @@
         <span class="error" id="error-consulta"></span>
         <span class="success" id="ok-consulta"></span>
         <button type="submit">Enviar Consulta</button>
+      </form>
+    </section>
+
+    <section class="est-solicitar">
+      <h2>Solicitar Sesión</h2>
+      <form id="form-sesion-est">
+        <label for="fecha-sesion">Fecha propuesta:</label>
+        <input type="date" id="fecha-sesion" required />
+        <label for="motivo-sesion">Motivo:</label>
+        <input type="text" id="motivo-sesion" required />
+        <span class="error" id="error-sesion"></span>
+        <span class="success" id="ok-sesion"></span>
+        <button type="submit">Solicitar</button>
       </form>
     </section>
   </main>

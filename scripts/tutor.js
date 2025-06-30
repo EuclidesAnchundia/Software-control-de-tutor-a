@@ -36,6 +36,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const vistaLista = document.getElementById("vista-lista");
   const vistaDetalle = document.getElementById("vista-detalle");
   const volverBtn = document.getElementById("volver");
+  const listaSolicitudes = document.getElementById("lista-solicitudes");
+
+  function cargarSolicitudes() {
+    listaSolicitudes.innerHTML = "";
+    const solicitudes = JSON.parse(localStorage.getItem("sesionesSolicitadas") || "[]");
+    solicitudes.forEach((s, i) => {
+      const div = document.createElement("div");
+      div.classList.add("sesion-card");
+      div.innerHTML = `
+        <p><strong>${s.estudiante}</strong></p>
+        <p><strong>Fecha:</strong> ${s.fecha}</p>
+        <p><strong>Motivo:</strong> ${s.motivo}</p>
+        <div class="acciones">
+          <button class="aceptar">Aceptar</button>
+          <button class="rechazar">Rechazar</button>
+        </div>
+      `;
+      div.querySelector(".aceptar").addEventListener("click", () => gestionarSolicitud(i));
+      div.querySelector(".rechazar").addEventListener("click", () => gestionarSolicitud(i));
+      listaSolicitudes.appendChild(div);
+    });
+  }
+
+  function gestionarSolicitud(index) {
+    const solicitudes = JSON.parse(localStorage.getItem("sesionesSolicitadas") || "[]");
+    solicitudes.splice(index, 1);
+    localStorage.setItem("sesionesSolicitadas", JSON.stringify(solicitudes));
+    cargarSolicitudes();
+  }
+
+  cargarSolicitudes();
 
   estudiantes.forEach(est => {
     const card = document.createElement("div");

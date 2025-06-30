@@ -86,6 +86,28 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.reset();
   });
 
+  // Solicitar nueva sesión
+  document.getElementById("form-sesion-est").addEventListener("submit", e => {
+    e.preventDefault();
+    const fecha = document.getElementById("fecha-sesion").value;
+    const motivo = document.getElementById("motivo-sesion").value.trim();
+    const error = document.getElementById("error-sesion");
+    const ok = document.getElementById("ok-sesion");
+    error.textContent = "";
+    ok.textContent = "";
+
+    if (!fecha || !motivo) {
+      error.textContent = "Complete todos los campos.";
+      return;
+    }
+
+    const solicitudes = JSON.parse(localStorage.getItem("sesionesSolicitadas") || "[]");
+    solicitudes.push({ estudiante: estudiante.nombre, fecha, motivo });
+    localStorage.setItem("sesionesSolicitadas", JSON.stringify(solicitudes));
+    ok.textContent = "Sesión solicitada.";
+    e.target.reset();
+  });
+
   // Sesiones solicitadas
   const sesiones = [
     {
