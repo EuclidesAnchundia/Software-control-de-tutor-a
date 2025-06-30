@@ -10,9 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
       entregas: [
         { titulo: "Propuesta", estado: "Aprobado", comentario: "Excelente propuesta." },
         { titulo: "Capítulo 1", estado: "Aprobado", comentario: "Revisar referencias." }
-      ],
-      sesiones: [
-        { fecha: "2025-06-05", motivo: "Capítulo 2", estado: "aceptada", observaciones: "Confirmada por estudiante." }
       ]
     },
     {
@@ -24,9 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
       semestre: "Octavo",
       entregas: [
         { titulo: "Propuesta", estado: "Pendiente", comentario: "Esperando revisión." }
-      ],
-      sesiones: [
-        { fecha: "2025-06-08", motivo: "Propuesta", estado: "pendiente", observaciones: "Esperando confirmación." }
       ]
     }
   ];
@@ -81,54 +75,37 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `).join("")}
 
-      <h4>Sesiones Solicitadas</h4>
-      ${est.sesiones.map(s => `
-        <div class="sesion-card">
+      <h4>Solicitudes de Sesión</h4>
+      ${obtenerSesiones(est.nombre).map(s => `
+        <div class="sesion-card" data-id="${s.id}">
           <p><strong>Fecha:</strong> ${s.fecha}</p>
           <p><strong>Motivo:</strong> ${s.motivo}</p>
-          <p><strong>Observaciones:</strong> ${s.observaciones}</p>
           <p><strong>Estado:</strong> ${s.estado}</p>
+          ${s.estado === 'pendiente' ? `<div class="acciones"><button class="aceptar">Aceptar</button><button class="rechazar">Rechazar</button></div>` : ''}
         </div>
       `).join("")}
-
-      <form id="form-sesion">
-        <label for="motivo">Motivo de la sesión:</label>
-        <input type="text" id="motivo" required />
-
-        <label for="fecha">Fecha propuesta:</label>
-        <input type="date" id="fecha" required />
-
-        <label for="obs">Observaciones:</label>
-        <textarea id="obs" rows="3"></textarea>
-
-        <span class="error" id="error-msg"></span>
-        <span class="success" id="ok-msg"></span>
-        <button type="submit">Solicitar sesión</button>
-      </form>
     `;
 
-    document.getElementById("form-sesion").addEventListener("submit", e => {
-      e.preventDefault();
-      const motivo = document.getElementById("motivo").value.trim();
-      const fecha = document.getElementById("fecha").value;
-      const error = document.getElementById("error-msg");
-      const ok = document.getElementById("ok-msg");
-      error.textContent = "";
-      ok.textContent = "";
-
-      if (!motivo || !fecha) {
-        error.textContent = "Todos los campos son obligatorios.";
-        return;
-      }
-
-      const fechaHoy = new Date().toISOString().split("T")[0];
-      if (fecha < fechaHoy) {
-        error.textContent = "La fecha debe ser hoy o futura.";
-        return;
-      }
-
-      ok.textContent = "Sesión solicitada correctamente.";
-      e.target.reset();
+    detalleBox.querySelectorAll('.aceptar').forEach(btn => {
+      btn.addEventListener('click', () => actualizarSesion(btn.closest('.sesion-card').dataset.id, 'aceptada', est));
     });
+    detalleBox.querySelectorAll('.rechazar').forEach(btn => {
+      btn.addEventListener('click', () => actualizarSesion(btn.closest('.sesion-card').dataset.id, 'rechazada', est));
+    });
+  }
+
+  function obtenerSesiones(nombre) {
+    const sesiones = JSON.parse(localStorage.getItem('sesiones')) || [];
+    return sesiones.filter(s => s.estudiante === nombre);
+  }
+
+  function actualizarSesion(id, estado, est) {
+    const sesiones = JSON.parse(localStorage.getItem('sesiones')) || [];
+    const ses = sesiones.find(s => s.id == id);
+    if (ses) {
+      ses.estado = estado;
+      localStorage.setItem('sesiones', JSON.stringify(sesiones));
+    }
+    mostrarDetalle(est);
   }
 });

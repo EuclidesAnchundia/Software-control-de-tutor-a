@@ -86,47 +86,58 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.reset();
   });
 
-  // Sesiones solicitadas
-  const sesiones = [
-    {
-      fecha: "2025-06-05",
-      motivo: "Revisión del capítulo 2",
-      observaciones: "Por favor, confirmar asistencia antes del viernes."
-    }
-  ];
-
+  // Sesiones solicitadas por el estudiante
   const listaSesiones = document.getElementById("lista-sesiones");
 
-  sesiones.forEach((s, i) => {
-    const div = document.createElement("div");
-    div.classList.add("sesion-card");
-    div.innerHTML = `
-      <p><strong>Fecha:</strong> ${s.fecha}</p>
-      <p><strong>Motivo:</strong> ${s.motivo}</p>
-      <p><strong>Observaciones:</strong> ${s.observaciones}</p>
-      <div class="acciones">
-        <button class="aceptar">Aceptar</button>
-        <button class="rechazar">Rechazar</button>
-      </div>
-      <div class="confirmacion" id="conf-${i}"></div>
-    `;
-
-    div.querySelector(".aceptar").addEventListener("click", () => {
-      confirmarSesion(i, "aceptada");
+  function cargarSesiones() {
+    const todas = JSON.parse(localStorage.getItem("sesiones")) || [];
+    const mias = todas.filter(s => s.estudiante === estudiante.nombre);
+    listaSesiones.innerHTML = "";
+    mias.forEach(s => {
+      const div = document.createElement("div");
+      div.classList.add("sesion-card");
+      div.innerHTML = `
+        <p><strong>Fecha:</strong> ${s.fecha}</p>
+        <p><strong>Motivo:</strong> ${s.motivo}</p>
+        <p><strong>Estado:</strong> ${s.estado}</p>
+      `;
+      listaSesiones.appendChild(div);
     });
-
-    div.querySelector(".rechazar").addEventListener("click", () => {
-      confirmarSesion(i, "rechazada");
-    });
-
-    listaSesiones.appendChild(div);
-  });
-
-  function confirmarSesion(index, estado) {
-    const div = document.getElementById(`conf-${index}`);
-    div.textContent = `Sesión ${estado} correctamente.`;
-    setTimeout(() => {
-      div.parentElement.remove();
-    }, 2000);
   }
+
+  cargarSesiones();
+
+  document.getElementById("form-sesion").addEventListener("submit", e => {
+    e.preventDefault();
+    const motivo = document.getElementById("motivo").value.trim();
+    const fecha = document.getElementById("fecha").value;
+    const error = document.getElementById("error-sesion");
+    const ok = document.getElementById("ok-sesion");
+    error.textContent = "";
+    ok.textContent = "";
+
+    if (!motivo || !fecha) {
+      error.textContent = "Todos los campos son obligatorios.";
+      return;
+    }
+
+    const fechaHoy = new Date().toISOString().split("T")[0];
+    if (fecha < fechaHoy) {
+      error.textContent = "La fecha debe ser hoy o futura.";
+      return;
+    }
+
+    const sesiones = JSON.parse(localStorage.getItem("sesiones")) || [];
+    sesiones.push({
+      id: Date.now(),
+      estudiante: estudiante.nombre,
+      motivo,
+      fecha,
+      estado: "pendiente"
+    });
+    localStorage.setItem("sesiones", JSON.stringify(sesiones));
+    ok.textContent = "Sesión solicitada.";
+    e.target.reset();
+    cargarSesiones();
+  });
 });

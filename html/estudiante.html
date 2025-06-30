@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel del Estudiante - ULEAM</title>
   <link rel="stylesheet" href="../estilos/estudiante.css" />
+  <link rel="stylesheet" href="../estilos/comun.css" />
   <link rel="icon" href="../imagenes/logo.png" type="image/png" />
   <script src="../scripts/estudiante.js" defer></script>
 </head>
@@ -13,6 +14,13 @@
     <img src="../imagenes/logo.png" alt="Logo ULEAM" class="logo-chico" />
     <p class="titulo-header">Mi Perfil de Titulación</p>
   </header>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="registro.html">Registro</a>
+    <a href="estudiante.html">Estudiante</a>
+    <a href="tutor.html">Tutor</a>
+    <a href="admin.html">Admin</a>
+  </nav>
 
   <main class="est-container">
     <section class="est-info">
@@ -35,7 +43,20 @@
     </section>
 
     <section class="est-sesiones">
-      <h2>Sesiones Solicitadas por el Tutor</h2>
+      <h2>Solicitar Sesión</h2>
+      <form id="form-sesion">
+        <label for="motivo">Motivo:</label>
+        <input type="text" id="motivo" required />
+
+        <label for="fecha">Fecha propuesta:</label>
+        <input type="date" id="fecha" required />
+
+        <span class="error" id="error-sesion"></span>
+        <span class="success" id="ok-sesion"></span>
+        <button type="submit">Solicitar</button>
+      </form>
+
+      <h2>Sesiones Solicitadas</h2>
       <div id="lista-sesiones"></div>
     </section>
 
