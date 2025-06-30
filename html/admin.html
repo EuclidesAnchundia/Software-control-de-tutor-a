@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Administrativo - ULEAM</title>
+  <link rel="stylesheet" href="../estilos/base.css" />
   <link rel="stylesheet" href="../estilos/admin.css" />
   <link rel="icon" href="../imagenes/logo.png" type="image/png" />
   <script src="../scripts/admin.js" defer></script>
@@ -27,6 +28,14 @@
         <option value="Administración">Administración</option>
       </select>
 
+      <label for="departamento-select">Departamento:</label>
+      <select id="departamento-select">
+        <option value="">-- Todos --</option>
+        <option value="Base de Datos">Base de Datos</option>
+        <option value="Matemáticas">Matemáticas</option>
+        <option value="Finanzas">Finanzas</option>
+      </select>
+
       <!-- Filtros -->
       <div class="filtros">
         <label><input type="checkbox" id="filtro-tutores-disponibles" /> Solo tutores disponibles</label>
@@ -40,6 +49,7 @@
           <tr>
             <th>Nombre</th>
             <th>Carrera</th>
+            <th>Departamento</th>
             <th>Tutor</th>
             <th>Acciones</th>
           </tr>
